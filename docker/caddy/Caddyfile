@@ -1,0 +1,21 @@
+https://vnvue.com {
+	# Set this path to your site's directory:
+	root * /srv/public/build/index.html
+	
+	
+	# file_server
+
+	tls /etc/cert/vnvue/vnvue.com+4.pem /etc/cert/vnvue/vnvue.com+4-key.pem
+
+	# Enable Gzip compression:
+	encode gzip
+
+	reverse_proxy web:7000 {
+		header_down Strict-Transport-Security max-age=31536000;
+	}
+
+	# Enable HTTP request logging
+	log {
+		output file /var/log/caddy/access.log
+	}
+}

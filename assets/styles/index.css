@@ -1,0 +1,17 @@
+@import './kohoFont.css';
+@import './madimiFont.css';
+@import './montserrat.css';
+@import './source.css';
+@import './ptsansFont.css';
+@import './nunitoFont.css';
+@import './worksansFont.css';
+@import './robotoFont.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Montserrat-VariableFont_wght;
+  font-weight: 500;
+}

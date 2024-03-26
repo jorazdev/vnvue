@@ -1,0 +1,59 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Mutation {
+  updatePerson(personInput: PersonInput!, rowsPerPage: Float!): UpdatePersons!
+}
+
+type PageMeta {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  page: Float!
+  pagesNumber: Float!
+  rowsNumber: Float!
+  rowsPerPage: Float!
+  rowsPerPageOptions: [Float!]!
+}
+
+input PageOption {
+  fieldFilter: String
+  order: String = "ASC"
+  page: Float = 1
+  rowsPerPage: Float = 5
+  search: SearchInput
+}
+
+input PersonInput {
+  contact: String!
+  firstName: String!
+  id: Float!
+  lastName: String!
+}
+
+type PersonOuput {
+  contact: String!
+  firstName: String!
+  id: Float!
+  lastName: String!
+}
+
+type Persons {
+  meta: PageMeta!
+  persons: [PersonOuput!]!
+}
+
+type Query {
+  findAllPerson(pageOption: PageOption!): Persons!
+}
+
+input SearchInput {
+  column: String!
+  search: String!
+  table: String!
+}
+
+type UpdatePersons {
+  pagesNumber: Float!
+  person: PersonOuput!
+}

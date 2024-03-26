@@ -1,0 +1,19 @@
+@font-face {
+  font-family: KoHo-Bold;
+  src: url('../fonts/koho/KoHo-Bold.ttf');
+}
+
+@font-face {
+  font-family: KoHo-BoldItalic;
+  src: url('../fonts/koho/KoHo-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: KoHo-ExtraLight;
+  src: url('../fonts/koho/KoHo-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: KoHo-ExtraLightItalic;
+  src: url('../fonts/koho/KoHo-ExtraLightItalic.ttf');
+}

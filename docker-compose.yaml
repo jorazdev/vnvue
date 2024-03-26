@@ -1,0 +1,66 @@
+version: "3.8"
+services:
+  
+  # nginx:
+  #   build:
+  #       context: .
+  #       dockerfile: ./docker/nginx/Dockerfile
+  #   container_name: nginx_vnvue
+  #   volumes:
+  #       - ./docker/nginx/default-http.conf:/etc/nginx/conf.d/default-http.conf
+  #   ports:
+  #       - 8080:80
+  #   restart: always
+    
+  caddy:
+    image: caddy:latest
+    container_name: caddy_vnvue
+    restart: unless-stopped
+    ports:
+      - "440:443"
+    volumes:
+      - ./docker/caddy/vnvue.com+4.pem:/etc/cert/vnvue/vnvue.com+4.pem
+      - ./docker/caddy/vnvue.com+4-key.pem:/etc/cert/vnvue/vnvue.com+4-key.pem
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - .:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: web_vnvue
+    volumes:
+      - .:/srv
+
+  database:
+    container_name: postgres_vnvue
+    image: postgres
+    restart: always
+    volumes:
+      - ./docker/postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5431:5432"
+    environment:
+      POSTGRES_PASSWORD: vnvue
+      POSTGRES_USER: vnvue
+      POSTGRES_DB: vnvue
+      
+  pgadmin:
+    container_name: pgadmin_vnvue
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "5050:80"
+    links:
+      - database
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin4
+    
+volumes:
+  caddy_data:
+  caddy_config:
+    
